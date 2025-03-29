@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeButton = document.querySelector('.close');
     const jsonContent = document.getElementById('jsonContent');
     const typewriterElement = document.getElementById('typewriter');
+    const copyButton = document.getElementById('copyButton');
     
     // タイプライターエフェクト用のテキスト
     const text = '東京広域電話網';
@@ -93,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // JSONデータを整形して表示
                 jsonContent.innerHTML = `
                     <div class="json-data">
-                        <p>JSONデータの内容：</p>
                         <pre class="json-formatted">${JSON.stringify(data, null, 2)}</pre>
                         <p class="source-note">データソース: <a href="${jsonUrl}" target="_blank">${jsonUrl}</a></p>
                     </div>
@@ -136,4 +136,67 @@ document.addEventListener('DOMContentLoaded', function() {
             fallbackBg.style.zIndex = '-1';
         }
     }, 2000);
+    
+    // JSONデータをクリップボードにコピーする機能
+    copyButton.addEventListener('click', function() {
+        // JSONデータを取得
+        const jsonElement = document.querySelector('.json-formatted');
+        
+        if (jsonElement) {
+            // JSONテキストを取得
+            const jsonText = jsonElement.textContent;
+            
+            // クリップボードにコピー
+            copyToClipboard(jsonText)
+                .then(() => {
+                    // コピー成功時のフィードバック
+                    copyButton.classList.add('copied');
+                    copyButton.textContent = 'コピーしました';
+                    
+                    // 3秒後に元の表示に戻す
+                    setTimeout(() => {
+                        copyButton.classList.remove('copied');
+                        copyButton.textContent = 'JSONをコピー';
+                    }, 3000);
+                })
+                .catch(err => {
+                    console.error('クリップボードへのコピーに失敗しました:', err);
+                    alert('クリップボードへのコピーに失敗しました。');
+                });
+        } else {
+            console.error('JSONデータが見つかりません');
+            alert('コピーするJSONデータが見つかりません。');
+        }
+    });
+    
+    // クリップボードにテキストをコピーする関数
+    async function copyToClipboard(text) {
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                // 安全なコンテキスト（HTTPS）でのクリップボードAPI
+                await navigator.clipboard.writeText(text);
+            } else {
+                // 非安全なコンテキスト（HTTP）でのフォールバック
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                
+                // テキストエリアをページ外に配置
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                
+                // テキストを選択してコピー
+                textArea.focus();
+                textArea.select();
+                document.execCommand('copy');
+                
+                // テキストエリアを削除
+                textArea.remove();
+            }
+        } catch (err) {
+            console.error('クリップボードへのコピーに失敗しました:', err);
+            throw err;
+        }
+    }
 });
