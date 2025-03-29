@@ -1,0 +1,318 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+    position: relative;
+}
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.video-background video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    filter: blur(4px);
+}
+
+.fallback-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    z-index: -2;
+}
+
+.grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 4px 4px;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+}
+
+.typewriter-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 3.5rem;
+    text-shadow: 2px 2px 4px gba(0, 0, 0, 0.7);
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+/* タイプライターカーソル */
+#cursor {
+    font-size: 3.5rem;
+    color: white;
+    animation: cursor-blink 0.8s infinite;
+    position: absolute;
+    bottom: 5px;
+}
+
+@keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+button, #mantelaButton {
+    color: white;
+    border: 2px solid white;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+/* モーダルスタイル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: rgba(30, 30, 30, 0.9);
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #555;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: white;
+    text-decoration: none;
+}
+
+h2 {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #555;
+    padding-bottom: 10px;
+}
+
+pre {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    font-family: monospace;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* JSONデータ表示スタイル */
+.json-data {
+    padding: 10px;
+}
+
+.json-data p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.json-formatted {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+    border: 1px solid rgba(79, 195, 247, 0.2);
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.source-note {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 15px;
+    text-align: right;
+}
+
+.source-note a {
+    color: #4fc3f7;
+    text-decoration: none;
+}
+
+.source-note a:hover {
+    text-decoration: underline;
+}
+
+/* ローディング表示 */
+.loading {
+    text-align: center;
+    padding: 30px;
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(79, 195, 247, 0.3);
+    border-top: 3px solid #4fc3f7;
+    border-radius: 50%;
+    margin: 20px auto 0;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* エラーメッセージ */
+.error-message {
+    background-color: rgba(244, 67, 54, 0.1);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    padding: 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.error-message p {
+    margin-bottom: 10px;
+    color: #ff8a80;
+}
+
+.error-message a {
+    color: #4fc3f7;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.error-message a:hover {
+    text-decoration: underline;
+}
+
+/* JSONリンク用スタイル */
+.json-url-container {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.json-url-container p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.json-link {
+    display: inline-block;
+    color: #4fc3f7;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 12px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 1.1rem;
+    word-break: break-all;
+    transition: all 0.3s ease;
+    margin: 10px 0;
+    border: 1px solid rgba(79, 195, 247, 0.3);
+}
+
+.json-link:hover {
+    background-color: rgba(79, 195, 247, 0.1);
+    box-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+    transform: translateY(-2px);
+}
+
+.note {
+    font-size: 0.9rem !important;
+    color: #aaa;
+    margin-top: 10px;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20% auto;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
