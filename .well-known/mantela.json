@@ -1,0 +1,56 @@
+{
+    "$schema": "https://tkytel.github.io/mantela/mantela.schema.json",
+    "version": "0.0.0",
+    "aboutMe": {
+        "name": "macaron",
+        "prefferedPrefix": "798",
+        "identifier": "24e24ec4-746a-4736-920d-47a725201154"
+    },
+    "extensions": [
+        {
+            "name": "Chitchat",
+            "extension": "200",
+            "type": "phone",
+            "model": "Grandstream GXP1625",
+            "identifier": "QHX2S4Q2"
+        },
+        {
+            "name": "BGM",
+            "extension": "201",
+            "type": "music",
+            "model": "7UFFB34R"
+        }
+    ],
+    "providers": [
+        {
+            "name": "macaron",
+            "prefferedPrefix": "0",
+            "identifier": "24e24ec4-746a-4736-920d-47a725201154",
+            "mantela": "https://pbx.macaron.jm8krg.net/.well-known/mantela.json"
+        },
+        {
+            "name": "MIKANETEL",
+            "prefix": "510",
+            "identifier": "93b2d256-39c1-4053-bda1-c0643dd40690",
+            "mantela": "https://unstable.kusaremkn.com/.well-known/mantela.json"
+        },
+        {
+            "name": "jiminy Public",
+            "identifier": "5bbdd9ae-4d41-420c-80df-eba486495b12",
+            "prefix": "108",
+            "mantela": "https://108jiminy.jp/phone/jiminypublicmantela.json"
+        },
+        {
+            "name": "jiminy Local",
+            "prefix": "119",
+            "identifier": "153048c5-db33-4e00-ad49-694762555d5c",
+            "mantela": "https://108jiminy.jp/phone/jiminylocalmantela.json"
+        },
+        {
+            "name": "mcteloadmin",
+            "prefix": "917",
+            "identifier": "XXX:meishi",
+            "mantela": ""
+        }
+    ]
+}
