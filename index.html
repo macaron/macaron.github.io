@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>東京広域電話網</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay loop muted playsinline id="bgVideo">
+            <source src="https://video.twimg.com/ext_tw_video/1894853623256944640/pu/vid/avc1/1280x720/hPxVbWKf8ajKGuSV.mp4?tag=12" type="video/mp4">
+        </video>
+        <div class="grid-overlay"></div>
+        <div class="fallback-bg"></div>
+    </div>
+
+    <div class="content">
+        <h1 id="typewriter"></h1>
+        <button id="mantelaButton">mantela.json</button>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>mantela.json</h2>
+            <pre id="jsonContent"></pre>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
