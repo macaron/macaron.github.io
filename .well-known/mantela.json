@@ -26,7 +26,7 @@
             "name": "macaron",
             "prefferedPrefix": "0",
             "identifier": "24e24ec4-746a-4736-920d-47a725201154",
-            "mantela": "https://pbx.macaron.jm8krg.net/.well-known/mantela.json"
+            "mantela": "https://telephony.jm8krg.net/.well-known/mantela.json"
         },
         {
             "name": "MIKANETEL",
