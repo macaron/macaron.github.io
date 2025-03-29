@@ -9,24 +9,47 @@ document.addEventListener('DOMContentLoaded', function() {
     // タイプライターエフェクト用のテキスト
     const text = '東京広域電話網';
     
-    // タイプライターエフェクトの実装
-    function typeWriter(element, text, speed = 300, index = 0) {
+    // タイプライターエフェクトの実装（カーソル位置制御版）
+    function typeWriter(element, text, cursor, speed = 300, index = 0) {
+        // カーソル要素を取得
+        const cursorElement = document.getElementById(cursor);
+        
         if (index < text.length) {
+            // 1文字追加
             element.textContent += text.charAt(index);
+            
+            // カーソル位置を更新
+            updateCursorPosition(element, cursorElement);
+            
+            // 次の文字へ
             index++;
-            setTimeout(() => typeWriter(element, text, speed, index), speed);
+            setTimeout(() => typeWriter(element, text, cursor, speed, index), speed);
         }
+    }
+    
+    // カーソル位置を更新する関数
+    function updateCursorPosition(textElement, cursorElement) {
+        // テキスト要素の幅を取得
+        const textWidth = textElement.offsetWidth;
+        
+        // カーソルの位置を設定
+        cursorElement.style.left = textWidth + 'px';
     }
     
     // ページ読み込み時にタイプライターエフェクトを開始
     // 一度テキストを空にしてから開始
     typewriterElement.textContent = '';
+    const cursorElement = document.getElementById('cursor');
+    
+    // 初期状態ではカーソルを左端に配置
+    cursorElement.style.left = '0px';
+    
     setTimeout(() => {
-        typeWriter(typewriterElement, text);
+        typeWriter(typewriterElement, text, 'cursor');
     }, 1000);
     
     // JSONデータのURL
-    const jsonUrl = 'http://macaron.github.io/.well-known/mantela.json';
+    const jsonUrl = 'http://telephony.jm8krg.net/.well-known/mantela.json';
     
     // ボタンクリックでモーダルを開く
     mantelaButton.addEventListener('click', function() {
