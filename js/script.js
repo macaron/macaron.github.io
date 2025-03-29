@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
     
     // JSONデータのURL
-    const jsonUrl = 'http://telephony.jm8krg.net/.well-known/mantela.json';
+    const jsonUrl = 'https://telephony.jm8krg.net/.well-known/mantela.json';
     
     // ボタンクリックでモーダルを開く
     mantelaButton.addEventListener('click', function() {
