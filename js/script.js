@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
     
     // JSONデータのURL
-    const jsonUrl = 'http://telephony.jm8krg.net/.well-known/mantela.json';
+    const jsonUrl = 'http://macaron.github.io/.well-known/mantela.json';
     
     // ボタンクリックでモーダルを開く
     mantelaButton.addEventListener('click', function() {
@@ -53,16 +53,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // JSONデータのURLを表示する関数
+    // JSONデータを取得して表示する関数
     function displayJsonUrl() {
-        // モーダルの内容を更新
-        jsonContent.innerHTML = `
-            <div class="json-url-container">
-                <p>以下のURLでJSONデータを確認できます：</p>
-                <a href="${jsonUrl}" target="_blank" class="json-link">${jsonUrl}</a>
-                <p class="note">※ブラウザの新しいタブで開きます</p>
-            </div>
-        `;
+        // ローディング表示
+        jsonContent.innerHTML = `<div class="loading">データを読み込み中...</div>`;
+        
+        // JSONデータを取得
+        fetch(jsonUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('ネットワークエラーが発生しました');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // JSONデータを整形して表示
+                jsonContent.innerHTML = `
+                    <div class="json-data">
+                        <p>JSONデータの内容：</p>
+                        <pre class="json-formatted">${JSON.stringify(data, null, 2)}</pre>
+                        <p class="source-note">データソース: <a href="${jsonUrl}" target="_blank">${jsonUrl}</a></p>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                // エラー表示
+                jsonContent.innerHTML = `
+                    <div class="error-message">
+                        <p>データの取得に失敗しました: ${error.message}</p>
+                        <p>URL: <a href="${jsonUrl}" target="_blank">${jsonUrl}</a></p>
+                    </div>
+                `;
+                console.error('JSONデータの取得エラー:', error);
+            });
     }
     
     // 背景動画の読み込みエラー処理
@@ -79,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 動画が正常に再生開始された場合
     video.addEventListener('playing', function() {
         console.log('動画の再生を開始しました');
-        fallbackBg.style.opacity = '0.5'; // 動画の上に薄く背景を重ねる（コントラスト向上のため）
+        fallbackBg.style.opacity = '0.1'; // 動画の上に薄く背景を重ねる（コントラスト向上のため）
     });
     
     // ページ読み込み時に動画の状態をチェック

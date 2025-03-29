@@ -52,6 +52,7 @@ body {
     height: 100%;
     background-image: radial-gradient(circle, rgba(0, 0, 0, 0.8) 1px, transparent 1px);
     background-size: 3px 3px;
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
     pointer-events: none;
 }
@@ -92,16 +93,16 @@ h1::after {
     50% { opacity: 0; }
 }
 
-button {
+button, #mantelaButton {
     color: white;
     border: 2px solid white;
     padding: 12px 24px;
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 4px;
     display: inline-block;
     margin-top: 10px;
+    text-decoration: none;
 }
 
 /* モーダルスタイル */
@@ -159,6 +160,95 @@ pre {
     font-family: monospace;
     max-height: 60vh;
     overflow-y: auto;
+}
+
+/* JSONデータ表示スタイル */
+.json-data {
+    padding: 10px;
+}
+
+.json-data p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.json-formatted {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+    border: 1px solid rgba(79, 195, 247, 0.2);
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.source-note {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 15px;
+    text-align: right;
+}
+
+.source-note a {
+    color: #4fc3f7;
+    text-decoration: none;
+}
+
+.source-note a:hover {
+    text-decoration: underline;
+}
+
+/* ローディング表示 */
+.loading {
+    text-align: center;
+    padding: 30px;
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(79, 195, 247, 0.3);
+    border-top: 3px solid #4fc3f7;
+    border-radius: 50%;
+    margin: 20px auto 0;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* エラーメッセージ */
+.error-message {
+    background-color: rgba(244, 67, 54, 0.1);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    padding: 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.error-message p {
+    margin-bottom: 10px;
+    color: #ff8a80;
+}
+
+.error-message a {
+    color: #4fc3f7;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.error-message a:hover {
+    text-decoration: underline;
 }
 
 /* JSONリンク用スタイル */
