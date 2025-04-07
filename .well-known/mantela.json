@@ -24,7 +24,7 @@
     "providers": [
         {
             "name": "macaron",
-            "prefferedPrefix": "0",
+            "prefix": "0",
             "identifier": "24e24ec4-746a-4736-920d-47a725201154",
             "mantela": "https://telephony.jm8krg.net/.well-known/mantela.json"
         },
@@ -57,6 +57,18 @@
             "prefix": "390",
             "identifier": "3be47f94-3185-4198-ac3d-ca5ccb573cc2",
             "mantela": "https://www.yude.jp.eu.org/.well-known/mantela.json"
+        },
+        {
+            "name": "hedgehog-tokyo",
+            "prefix": "47abe85d-fe09-691d-f928-4f75b27a157f",
+            "identifier": "242",
+            "mantela": "https://rainyvillage.jp/mantela/mantela.json"
+        },
+        {
+            "name": "YamaSeriPhones",
+            "prefix": "418",
+            "identifier": "859c4016-624e-495f-86b4-ca0beb2e7c62",
+            "mantela": "https://yamaserif.com/phone/mantela.json"
         }
     ]
 }
