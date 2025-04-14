@@ -1,9 +1,9 @@
 {
-    "$schema": "https://tkytel.github.io/mantela/mantela.schema.json",
-    "version": "0.0.0",
+    "$schema": "https://tkytel.github.io/mantela/0.1/mantela.schema.json",
+    "version": "0.1.0",
     "aboutMe": {
         "name": "macaron",
-        "prefferedPrefix": "798",
+        "preferredPrefix": "798",
         "identifier": "24e24ec4-746a-4736-920d-47a725201154"
     },
     "extensions": [
