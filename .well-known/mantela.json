@@ -4,7 +4,11 @@
     "aboutMe": {
         "name": "macaron",
         "preferredPrefix": "798",
-        "identifier": "24e24ec4-746a-4736-920d-47a725201154"
+        "identifier": "24e24ec4-746a-4736-920d-47a725201154",
+        "sipUri": [
+            "sip:macaronpbx.tail2fa311.ts.net:5060;transport=udp",
+            "sip:macaronpbx.tail2fa311.ts.net:5060;transport=tcp"
+        ]
     },
     "extensions": [
         {
