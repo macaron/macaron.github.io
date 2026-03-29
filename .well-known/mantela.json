@@ -36,7 +36,7 @@
             "name": "MIKANETEL",
             "prefix": "510",
             "identifier": "93b2d256-39c1-4053-bda1-c0643dd40690",
-            "mantela": "https://unstable.kusaremkn.com/.well-known/mantela.json"
+            "mantela": "https://mantela.kusaremkn.com/mikanetel.json"
         },
         {
             "name": "jiminy Public",
